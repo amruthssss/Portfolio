@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
@@ -14,60 +15,279 @@ const navLinks = [
 const skillCategories = [
   {
     icon: "⚡",
-    title: "Languages & Libraries",
+    title: "Languages",
     color: "cyan",
-    items: ["Python", "SQL", "Pandas", "NumPy", "Scikit-learn"],
+    items: ["Python", "SQL", "C", "HTML", "CSS"],
   },
   {
-    icon: "🔗",
-    title: "Web & APIs",
+    icon: "🧠",
+    title: "AI & Machine Learning",
+    color: "green",
+    items: ["YOLOv11", "Prophet", "LSTM", "Agentic Systems"],
+  },
+  {
+    icon: "✨",
+    title: "Generative AI",
     color: "pink",
-    items: ["FastAPI", "Flask", "Streamlit", "React"],
+    items: ["Generative AI", "LLMs", "RAG", "Prompt Engineering"],
+  },
+  {
+    icon: "🧩",
+    title: "Frameworks & Libraries",
+    color: "yellow",
+    items: ["FastAPI", "Pandas", "NumPy", "Scikit-learn", "TensorFlow", "PyTorch", "Capacitor.js", "LangChain"],
+  },
+  {
+    icon: "🗄️",
+    title: "Databases",
+    color: "cyan",
+    items: ["MySQL", "PostgreSQL", "SQLite", "MongoDB", "Firestore", "ChromaDB"],
   },
   {
     icon: "☁️",
-    title: "Cloud & DevOps",
+    title: "Cloud & Deployment",
     color: "green",
-    items: ["AWS", "GCP", "Docker", "Git"],
+    items: ["Firebase", "AWS (EC2, S3)", "Google Cloud Platform", "Vercel", "Streamlit Cloud"],
   },
   {
-    icon: "📊",
-    title: "Data & Visualization",
-    color: "yellow",
-    items: ["MySQL", "Power BI", "Matplotlib", "Seaborn"],
+    icon: "🛠️",
+    title: "Tools & Platforms",
+    color: "pink",
+    items: ["Git", "GitHub", "Android Studio", "OpenCV", "Power BI", "WebSockets", "REST APIs", "Google AI Studio"],
   },
+];
+
+const certifications = [
+  { name: "Google AI Professional Certificate", org: "Google (Coursera)", year: "2026" },
+  { name: "Data Analytics with Python", org: "NPTEL, IIT Roorkee", year: "2026" },
+  { name: "Artificial Intelligence Fundamentals", org: "IBM SkillsBuild", year: "2025" },
+  { name: "Networking and Cloud Computing", org: "Microsoft (Coursera)", year: "2025" },
+  { name: "Python Data Analysis", org: "Rice University (Coursera)", year: "2025" },
 ];
 
 const projects = [
   {
-    title: "Retail Inventory & Sales Analytics",
+    title: "Orbit AI Engineering Platform",
+    date: "August 2026",
     description:
-      "Built a dashboard to help track inventory and predict demand using Prophet. It's not perfect, but it handles real-time stock alerts and multi-store data — and I learned a ton about time-series along the way.",
-    tech: ["Python", "Streamlit", "MySQL", "Prophet"],
-    github: "https://github.com/amruthssss/retail-dashboard",
+      "A full-stack AI engineering platform integrating Gemini-powered chat, RAG, AI agents, tool calling, workflows, and LLM evaluation.",
+    problem:
+      "Production AI applications need chat, retrieval, agents, and evaluation working together reliably — not as disconnected experiments.",
+    solution:
+      "Built a full-stack platform on FastAPI and React/TypeScript that unifies a Gemini-powered chat interface with a RAG pipeline, tool-calling agents, and an evaluation layer, backed by PostgreSQL and Redis.",
+    architecture: [
+      "Document ingestion → Gemini embeddings → vector retrieval",
+      "Reranking of retrieved context for higher relevance",
+      "Grounded chat responses with citations",
+      "AI agents with tool calling for multi-step workflows",
+      "Tavily-powered web research tool integration",
+      "LLM evaluation layer to assess response quality",
+    ],
+    features: [
+      "Gemini-powered chat",
+      "RAG pipeline with document ingestion",
+      "Gemini embeddings & vector retrieval",
+      "Reranking",
+      "Grounded responses with citations",
+      "AI agents & tool calling",
+      "Workflows",
+      "LLM evaluation",
+      "Tavily web research",
+    ],
+    tech: ["Python", "FastAPI", "React", "TypeScript", "Gemini", "LLMs", "RAG", "Embeddings", "Vector Search", "Reranking", "AI Agents", "Tool Calling", "LLM Evaluation", "PostgreSQL", "Redis", "Tavily"],
+    metrics: ["Vercel frontend deployment", "Render backend deployment", "Supabase PostgreSQL", "Upstash Redis"],
+    github: "https://github.com/amruthssss/Orbit_AI",
+    demo: null,
+    featured: true,
+  },
+  {
+    title: "LaunchPad AI",
+    date: "February 2026",
+    description:
+      "An autonomous multi-agent platform transforming a startup idea into market research, architecture, production-ready code, and ML-driven revenue forecasts.",
+    problem:
+      "Turning a raw startup idea into research, architecture, code, and financial projections normally takes many specialists and a lot of manual work.",
+    solution:
+      "Designed a multi-agent system on LangGraph and LangChain where specialized agents handle market research, architecture design, and code generation, with a self-correcting Critic Agent that scores outputs and routes retries, plus an ML forecasting layer for zero-historical-data revenue projections.",
+    architecture: [
+      "Startup idea → Market Research Agent",
+      "Software Architecture Agent generates system design",
+      "Code Generation Agent produces production-ready code",
+      "Critic Agent scores output from 0.0–1.0 and triggers LangGraph retry routing",
+      "RAG pipeline over ChromaDB with OpenAI embeddings for grounded context",
+      "Forecasting Agent projects revenue using Prophet, XGBoost, and LSTM",
+      "FastAPI backend streams progress to a React frontend over WebSockets",
+    ],
+    features: [
+      "Multi-agent architecture",
+      "Market research automation",
+      "Software architecture generation",
+      "Production-ready code generation",
+      "ML-driven revenue forecasting",
+      "Self-correcting Critic Agent",
+      "LLM scoring from 0.0–1.0",
+      "LangGraph retry routing",
+      "RAG pipeline with ChromaDB",
+      "OpenAI embeddings",
+      "Zero-historical-data projections",
+      "WebSocket streaming",
+      "PostgreSQL persistence",
+    ],
+    tech: ["Python", "LangGraph", "LangChain", "FastAPI", "React", "PostgreSQL", "ChromaDB", "XGBoost", "LSTM", "RAG", "OpenAI GPT-4"],
+    metrics: ["LLM critic scoring scale: 0.0 – 1.0", "Forecasting via Prophet, XGBoost & LSTM"],
+    github: "https://github.com/amruthssss/LaunchPad-AI",
+    demo: null,
+    featured: true,
+  },
+  {
+    title: "Multimodal Surveillance System for Intelligent Security Monitoring",
+    date: "June 2025",
+    description:
+      "A real-time AI surveillance platform detecting fire, intrusion, explosion, accidents, and smoke from live feeds using parallel deep learning.",
+    problem:
+      "Single-model surveillance systems struggle to reliably flag diverse threats — fire, intrusion, explosions, accidents, smoke — from live video without excessive false alarms.",
+    solution:
+      "Combined YOLOv11 threat detection with 3D-CNN + LSTM action recognition and CNN-based emotion recognition, fused through an Adaptive Fusion Engine with temporal validation across frames to confirm threats before alerting.",
+    architecture: [
+      "Live camera feed → YOLOv11 object/threat detection",
+      "3D-CNN + LSTM analyzes temporal action sequences",
+      "CNN emotion recognition adds behavioral context",
+      "Adaptive Fusion Engine combines model outputs",
+      "Temporal validation requires 65% confidence across 5 frames before alerting",
+      "Alerts trigger audio alarm plus SMS/email via Twilio",
+      "Events logged to MongoDB, visualized on a Flask + React live dashboard",
+    ],
+    features: [
+      "YOLOv11 threat detection",
+      "3D-CNN + LSTM action recognition",
+      "CNN emotion recognition",
+      "Adaptive Fusion Engine",
+      "Temporal validation across frames",
+      "Audio alarm",
+      "SMS/email notifications via Twilio",
+      "MongoDB event logging",
+      "Flask + React live dashboard",
+    ],
+    tech: ["Python", "YOLOv11", "3D-CNN", "LSTM", "PyTorch", "Flask", "React", "OpenCV", "PostgreSQL"],
+    metrics: ["65% confidence threshold across 5 consecutive frames"],
+    github: "https://github.com/amruthssss/multimodal-Surveillance",
+    demo: null,
+    featured: true,
   },
   {
     title: "EV Charging Analytics Platform",
+    date: "March 2025",
     description:
-      "An analytics tool for EV charging stations — user clustering, usage forecasting, and a containerized backend. My first serious attempt at Docker, and it actually worked.",
-    tech: ["Python", "FastAPI", "Docker", "Scikit-learn"],
-    github: "https://github.com/amruthssss/keySpotting",
+      "An interactive ML platform tracking EV infrastructure usage, forecasting grid demand, and clustering patterns across 457 charging stations.",
+    problem:
+      "EV charging infrastructure generates usage data that's hard to interpret without tooling to forecast demand or identify behavioral patterns across stations.",
+    solution:
+      "Built a multi-page Streamlit application that forecasts grid demand with Facebook Prophet and clusters station behavior using K-Means and PCA, surfacing the results through interactive Plotly dashboards.",
+    architecture: [
+      "Raw usage data across 457 charging stations",
+      "Facebook Prophet models for grid demand forecasting",
+      "K-Means clustering + PCA for station behavior analysis",
+      "4 station behavioral personas identified from clusters",
+      "Results rendered through interactive Plotly dashboards in a multi-page Streamlit app",
+    ],
+    features: [
+      "Grid demand forecasting",
+      "Station behavior analysis",
+      "K-Means clustering",
+      "PCA dimensionality reduction",
+      "4 station behavioral personas",
+      "Interactive Plotly dashboards",
+      "Multi-page Streamlit application",
+    ],
+    tech: ["Python", "Streamlit", "Facebook Prophet", "Scikit-learn", "K-Means", "PCA", "Plotly"],
+    metrics: ["457 charging stations analyzed", "4 behavioral personas identified"],
+    github: "https://github.com/amruthssss/ev_charging_analysis",
+    demo: null,
+    featured: false,
   },
   {
-    title: "Multimodal Surveillance System",
+    title: "Retail Inventory and Sales Analytics Platform",
+    date: "October 2024",
     description:
-      "Combined YOLOv8 for object detection with activity recognition to flag potential threats in real time. A challenging project that pushed me to figure out how to make multiple ML models talk to each other.",
-    tech: ["Python", "YOLOv8", "Flask", "React"],
-    github: "https://github.com/amruthssss/multimodal-Surveillance-",
+      "A full-stack retail dashboard providing real-time inventory visibility, AI-driven demand forecasting, and automated restock alerts.",
+    problem:
+      "Retail teams need real-time visibility into inventory and sales trends, plus early warning before stockouts or expiry, without manually cross-checking spreadsheets.",
+    solution:
+      "Built a login-protected Streamlit platform with an optimized MySQL query layer powering 8+ dashboards for inventory tracking, expiry monitoring, and sales funnels, with Facebook Prophet demand forecasts triggering automated SMTP restock alerts and PDF reports.",
+    architecture: [
+      "MySQL database with an optimized query layer",
+      "Facebook Prophet forecasts demand from historical sales",
+      "Automated restock alerts triggered via SMTP",
+      "PDF report generation for stakeholders",
+      "Login-based authentication with admin management",
+      "8+ interactive Streamlit dashboards for inventory, expiry, and sales funnels",
+    ],
+    features: [
+      "8+ interactive Streamlit dashboards",
+      "Inventory tracking",
+      "Expiry monitoring",
+      "Sales funnels",
+      "Demand forecasting",
+      "Automated restock alerts",
+      "Optimized MySQL query layer",
+      "SMTP alerts",
+      "PDF report generation",
+      "Login-based authentication",
+      "Admin management",
+    ],
+    tech: ["Python", "Streamlit", "MySQL", "Pandas", "Facebook Prophet", "SMTP"],
+    metrics: ["8+ interactive dashboards"],
+    github: "https://github.com/amruthssss/retail-project",
+    demo: null,
+    featured: false,
   },
   {
     title: "Spoken Keyword Spotting System",
+    date: "September 2024",
     description:
-      "Built a hybrid CNN-SVM model that spots 20+ spoken keywords in real-time audio streams — hit an F1 of 0.98 and cut inference time by 40% with quantization. Also set up the full ML pipeline end-to-end so it's actually reusable and not just a one-off notebook.",
-    tech: ["Python", "TensorFlow", "Scikit-learn", "NumPy"],
-    github: "https://github.com/amruthssss/keySpotting",
+      "A lightweight keyword spotting system built with a hybrid CNN-SVM pipeline using Librosa MFCC and mel-spectrogram features, trained on Google Speech Commands.",
+    problem:
+      "Edge devices need to recognize spoken keywords with low latency and a small footprint, ruling out large, heavyweight audio models.",
+    solution:
+      "Extracted MFCC and mel-spectrogram features with Librosa and trained a hybrid CNN-SVM pipeline on the Google Speech Commands dataset, then applied INT8 quantization to shrink the model for edge deployment.",
+    architecture: [
+      "Raw audio → Librosa MFCC + mel-spectrogram feature extraction",
+      "CNN feature learning feeding an SVM classifier",
+      "Trained and evaluated on Google Speech Commands (10 keyword classes)",
+      "INT8 quantization applied for edge-device deployment",
+    ],
+    features: [
+      "Hybrid CNN-SVM pipeline",
+      "Librosa MFCC & mel-spectrogram features",
+      "Trained on Google Speech Commands",
+      "INT8 quantization",
+      "Edge-device oriented",
+    ],
+    tech: ["Python", "TensorFlow", "Scikit-learn", "Librosa", "NumPy", "CNN", "SVM", "INT8 Quantization"],
+    metrics: ["INT8 quantization reduced model size by 75%", "Latency reduced by 40%", "0.98 F1-score", "10 keyword classes"],
+    github: "https://github.com/amruthssss/keySpotting/tree/master/Spoken-Keyword-Spotting",
+    demo: null,
+    featured: false,
   },
 ];
+
+const experience = {
+  company: "MindMatrix.io",
+  companyUrl: "https://makes.mindmatrix.io/",
+  role: "Android Developer Intern",
+  location: "Bengaluru, India",
+  period: "Feb 2026 – May 2026",
+  bullets: [
+    "Developed Akshara-Deepa, a full stack Android SSLC learning app using Capacitor.js, Firebase, and Google Sign-In.",
+    "Integrated Gemini 1.5 Flash for adaptive quizzes, answer evaluation, personalized study planner, and AI tutor.",
+    "Built Strength Map radar charts visualizing subject mastery, accuracy, and streaks synced via Firestore.",
+    "Owned the full development lifecycle — UI/UX design using Material Design, Android Studio setup, APK testing and debugging, and production deployment via Gradle.",
+    "Achieved a 100% crash-free launch on the Google Play internal test track.",
+  ],
+  tags: ["Capacitor.js", "Firebase", "Gemini 1.5 Flash", "Android Studio", "Material Design"],
+};
+
+const coursework = ["DBMS", "Operating Systems", "OOPS", "Machine Learning", "Artificial Intelligence", "Data Analytics"];
 
 /* ── Neon color map ── */
 const neon = {
@@ -120,6 +340,15 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
+const sectionReveal = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 /* ── Typewriter ── */
 function useTypewriter(words, speed = 90, pause = 2000) {
   const [text, setText] = useState("");
@@ -151,17 +380,151 @@ function useTypewriter(words, speed = 90, pause = 2000) {
   return text;
 }
 
-/* ── Component ── */
-/* ── Section reveal variant ── */
-const sectionReveal = {
-  hidden: { opacity: 0, y: 60 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+/* ── Project detail modal ── */
+function ProjectModal({ project, onClose, darkMode }) {
+  const ref = useRef(null);
 
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  if (!project) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[90] flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto"
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className={`absolute inset-0 ${darkMode ? "bg-black/80" : "bg-slate-900/40"} backdrop-blur-sm`} />
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 30, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 20, scale: 0.97 }}
+        transition={{ type: "spring", stiffness: 300, damping: 28 }}
+        className={`relative z-10 w-full max-w-3xl my-8 sm:my-12 rounded-2xl border p-5 sm:p-10 ${
+          darkMode ? "bg-black border-white/10" : "bg-white border-slate-200"
+        }`}
+      >
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          className={`absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center border transition-colors ${
+            darkMode ? "border-white/10 text-white/50 hover:text-cyan-400 hover:border-cyan-500/30" : "border-slate-200 text-slate-500 hover:text-indigo-600 hover:border-indigo-300"
+          }`}
+        >
+          ✕
+        </button>
+
+        <p className={`text-xs font-mono tracking-widest ${darkMode ? "text-cyan-400/70" : "text-indigo-500"}`}>{project.date}</p>
+        <h3 className={`mt-2 text-2xl sm:text-3xl font-black leading-tight ${darkMode ? "text-white" : "text-slate-800"}`}>
+          {project.title}
+        </h3>
+        <p className={`mt-4 leading-relaxed ${darkMode ? "text-white/50" : "text-slate-600"}`}>{project.description}</p>
+
+        <div className="mt-8 grid sm:grid-cols-2 gap-6 sm:gap-8">
+          <div>
+            <h4 className={`section-label mb-2 ${darkMode ? "text-pink-400" : "text-violet-500"}`}>// problem</h4>
+            <p className={`text-sm leading-relaxed ${darkMode ? "text-white/40" : "text-slate-500"}`}>{project.problem}</p>
+          </div>
+          <div>
+            <h4 className={`section-label mb-2 ${darkMode ? "text-green-400" : "text-emerald-500"}`}>// solution</h4>
+            <p className={`text-sm leading-relaxed ${darkMode ? "text-white/40" : "text-slate-500"}`}>{project.solution}</p>
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <h4 className={`section-label mb-3 ${darkMode ? "text-cyan-400" : "text-indigo-500"}`}>// architecture &amp; workflow</h4>
+          <ol className="space-y-2">
+            {project.architecture.map((step, i) => (
+              <li key={i} className={`flex gap-3 text-sm leading-relaxed ${darkMode ? "text-white/50" : "text-slate-600"}`}>
+                <span className={`font-mono shrink-0 ${darkMode ? "text-cyan-400/60" : "text-indigo-400"}`}>{String(i + 1).padStart(2, "0")}</span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="mt-8">
+          <h4 className={`section-label mb-3 ${darkMode ? "text-yellow-400" : "text-amber-500"}`}>// key features</h4>
+          <div className="flex flex-wrap gap-2">
+            {project.features.map((f) => (
+              <span
+                key={f}
+                className={`text-xs font-medium px-3 py-1.5 rounded-lg border ${
+                  darkMode ? "bg-white/[0.03] text-white/60 border-white/10" : "bg-slate-50 text-slate-600 border-slate-200"
+                }`}
+              >
+                {f}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <h4 className={`section-label mb-3 ${darkMode ? "text-cyan-400" : "text-indigo-500"}`}>// technologies</h4>
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className={`text-xs font-mono px-2.5 py-1 rounded border ${
+                  darkMode ? "bg-cyan-500/5 text-cyan-400/70 border-cyan-500/10" : "bg-indigo-50 text-indigo-600/80 border-indigo-200"
+                }`}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {project.metrics && project.metrics.length > 0 && (
+          <div className="mt-8">
+            <h4 className={`section-label mb-3 ${darkMode ? "text-green-400" : "text-emerald-500"}`}>// results &amp; notes</h4>
+            <ul className="grid sm:grid-cols-2 gap-2">
+              {project.metrics.map((m) => (
+                <li
+                  key={m}
+                  className={`text-sm rounded-lg px-4 py-2.5 border ${
+                    darkMode ? "bg-green-500/5 text-green-300/80 border-green-500/10" : "bg-emerald-50 text-emerald-700 border-emerald-200"
+                  }`}
+                >
+                  {m}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="mt-10 flex flex-wrap gap-3">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            className="neon-btn-sm !py-2.5 !px-5"
+          >
+            View on GitHub ↗
+          </a>
+          {project.demo && (
+            <a href={project.demo} target="_blank" rel="noreferrer" className="neon-btn-sm !py-2.5 !px-5">
+              Live Demo ↗
+            </a>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ── Component ── */
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
@@ -169,8 +532,13 @@ export default function Portfolio() {
   const [cursorHover, setCursorHover] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [activeProject, setActiveProject] = useState(null);
   const typed = useTypewriter(
-    ["I build things that work.", "I learn fast, ship faster.", "I'm looking for my next role."],
+    [
+      "Building with LLMs, RAG & AI Agents.",
+      "Turning ideas into production ML systems.",
+      "Open to AI/ML & Software Engineering roles.",
+    ],
     80,
     1800
   );
@@ -184,7 +552,9 @@ export default function Portfolio() {
 
   /* ── Active section observer ── */
   useEffect(() => {
-    const sections = document.querySelectorAll("section[id], [id='about'], [id='experience'], [id='skills'], [id='projects'], [id='education'], [id='contact']");
+    const sections = document.querySelectorAll(
+      "section[id], [id='about'], [id='experience'], [id='skills'], [id='projects'], [id='certifications'], [id='education'], [id='contact']"
+    );
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -222,7 +592,6 @@ export default function Portfolio() {
       });
     };
     attach();
-    // Re-attach on DOM changes (e.g. menu open)
     const mo = new MutationObserver(attach);
     mo.observe(document.body, { childList: true, subtree: true });
     return () => {
@@ -242,35 +611,19 @@ export default function Portfolio() {
   return (
     <div className={`min-h-screen font-sans scroll-smooth transition-colors duration-500 ${themeClasses} ${darkMode ? 'selection:bg-cyan-500/30 selection:text-white' : 'selection:bg-cyan-500/20 selection:text-cyan-900'}`}>
       {/* ── Custom cursor (desktop only) ── */}
-      {/* Inner dot — fast, precise */}
       <motion.div
         className="hidden lg:block fixed top-0 left-0 z-[100] pointer-events-none"
-        animate={{
-          x: cursorPos.x - 4,
-          y: cursorPos.y - 4,
-        }}
+        animate={{ x: cursorPos.x - 4, y: cursorPos.y - 4 }}
         transition={{ type: "spring", stiffness: 1200, damping: 40, mass: 0.1 }}
       >
-        <div className={`w-2 h-2 rounded-full transition-all duration-150 ${
-          cursorHover
-            ? 'bg-cyan-400 scale-0'
-            : 'bg-cyan-400 scale-100'
-        }`} />
+        <div className={`w-2 h-2 rounded-full transition-all duration-150 ${cursorHover ? 'bg-cyan-400 scale-0' : 'bg-cyan-400 scale-100'}`} />
       </motion.div>
-      {/* Outer ring — smooth, trailing */}
       <motion.div
         className="hidden lg:block fixed top-0 left-0 z-[100] pointer-events-none mix-blend-difference"
-        animate={{
-          x: cursorPos.x - (cursorHover ? 24 : 16),
-          y: cursorPos.y - (cursorHover ? 24 : 16),
-        }}
+        animate={{ x: cursorPos.x - (cursorHover ? 24 : 16), y: cursorPos.y - (cursorHover ? 24 : 16) }}
         transition={{ type: "spring", stiffness: 250, damping: 22, mass: 0.5 }}
       >
-        <div className={`rounded-full border-2 transition-all duration-300 ${
-          cursorHover
-            ? 'w-12 h-12 border-white bg-white/20'
-            : 'w-8 h-8 border-white/50 bg-transparent'
-        }`} />
+        <div className={`rounded-full border-2 transition-all duration-300 ${cursorHover ? 'w-12 h-12 border-white bg-white/20' : 'w-8 h-8 border-white/50 bg-transparent'}`} />
       </motion.div>
 
       {/* ── Scroll progress ── */}
@@ -306,9 +659,7 @@ export default function Portfolio() {
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             onClick={scrollToTop}
             className={`fixed bottom-6 left-6 sm:bottom-8 sm:left-8 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all group ${
-              darkMode
-                ? 'bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-sm'
-                : 'bg-white hover:bg-slate-50 border border-slate-200 shadow-lg hover:shadow-indigo-100/50'
+              darkMode ? 'bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-sm' : 'bg-white hover:bg-slate-50 border border-slate-200 shadow-lg hover:shadow-indigo-100/50'
             }`}
             aria-label="Scroll to top"
           >
@@ -319,6 +670,13 @@ export default function Portfolio() {
         )}
       </AnimatePresence>
 
+      {/* ── Project detail modal ── */}
+      <AnimatePresence>
+        {activeProject && (
+          <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} darkMode={darkMode} />
+        )}
+      </AnimatePresence>
+
       {/* ── Navbar ── */}
       <nav className={`fixed top-0 w-full z-50 backdrop-blur-2xl border-b transition-colors duration-500 ${darkMode ? 'bg-black/60 border-white/5' : 'bg-[#faf8f5]/90 border-slate-200/60'}`}>
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
@@ -326,14 +684,14 @@ export default function Portfolio() {
             A.
           </a>
 
-          <ul className="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm">
+          <ul className="hidden md:flex items-center space-x-5 lg:space-x-7 text-sm">
             {navLinks.map((l) => {
               const isActive = activeSection === l.href.replace('#', '');
               return (
                 <li key={l.label}>
                   <a
                     href={l.href}
-                    className={`relative py-1 transition-colors duration-300 font-medium ${
+                    className={`relative py-1 transition-colors duration-300 font-medium whitespace-nowrap ${
                       isActive
                         ? darkMode ? 'text-cyan-400' : 'text-indigo-600'
                         : darkMode ? 'text-white/50 hover:text-white/80' : 'text-slate-500 hover:text-slate-800'
@@ -352,11 +710,7 @@ export default function Portfolio() {
               );
             })}
             <li>
-              <a
-                href="/Amruth_S_Sharma_Resume.pdf"
-                download
-                className="ml-2 neon-btn-sm"
-              >
+              <a href="/Amruth_S_Sharma_Resume.pdf" download className="ml-1 neon-btn-sm">
                 Resume ↓
               </a>
             </li>
@@ -432,19 +786,17 @@ export default function Portfolio() {
 
       {/* ── Hero ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6">
-        {/* Glow orbs — neon for dark, warm pastels for light */}
         <div className={`absolute top-1/3 -left-20 sm:-left-40 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] rounded-full blur-[100px] sm:blur-[150px] ${darkMode ? 'bg-cyan-500/8' : 'bg-indigo-300/15'}`} />
         <div className={`absolute bottom-1/3 -right-20 sm:-right-40 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] rounded-full blur-[100px] sm:blur-[150px] ${darkMode ? 'bg-pink-500/8' : 'bg-rose-300/15'}`} />
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full blur-[80px] sm:blur-[120px] ${darkMode ? 'bg-yellow-500/5' : 'bg-amber-200/15'}`} />
 
-        {/* Dot grid */}
         <div className={`absolute inset-0 bg-[size:30px_30px] sm:bg-[size:40px_40px] ${darkMode ? 'bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)]' : 'bg-[radial-gradient(rgba(0,0,0,0.04)_1px,transparent_1px)]'}`} />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="relative z-10 text-center max-w-3xl"
+          className="relative z-10 text-center max-w-4xl"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
@@ -452,100 +804,64 @@ export default function Portfolio() {
             transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
             className={`inline-block mb-6 px-4 py-1.5 rounded-full border text-xs font-mono tracking-wider ${darkMode ? 'border-cyan-500/30 bg-cyan-500/5 text-cyan-400' : 'border-indigo-300 bg-indigo-50 text-indigo-600'}`}
           >
-            🚀 ACTIVELY LOOKING FOR ROLES
+            🚀 OPEN TO AI/ML &amp; SOFTWARE ENGINEERING ROLES
           </motion.div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tighter">
-            <span className={darkMode ? 'text-white' : 'text-slate-800'}>Amruth</span>
-            <br />
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tighter">
+            <span className={darkMode ? 'text-white' : 'text-slate-800'}>Amruth</span>{" "}
             <span className={darkMode ? 'neon-text-gradient' : 'light-name-gradient'}>S Sharma</span>
           </h1>
 
-          {/* Available for badges */}
-          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2">
-            {[
-              { label: "Full-Time", color: "cyan" },
-              { label: "Internship", color: "green" },
-              { label: "Jobs", color: "pink" },
-            ].map((tag) => (
-              <span
-                key={tag.label}
-                className={`text-xs font-mono px-3 py-1.5 rounded-full border ${
-                  darkMode
-                    ? (tag.color === 'cyan' ? 'border-cyan-500/20 bg-cyan-500/5 text-cyan-400'
-                      : tag.color === 'green' ? 'border-green-500/20 bg-green-500/5 text-green-400'
-                      : 'border-pink-500/20 bg-pink-500/5 text-pink-400')
-                    : (tag.color === 'cyan' ? 'border-indigo-300 bg-indigo-50 text-indigo-600'
-                      : tag.color === 'green' ? 'border-emerald-300 bg-emerald-50 text-emerald-600'
-                      : 'border-rose-300 bg-rose-50 text-rose-600')
-                }`}
-              >
-                ● {tag.label}
-              </span>
-            ))}
-          </div>
+          <p className={`mt-5 sm:mt-6 text-lg sm:text-2xl md:text-3xl font-bold tracking-tight ${darkMode ? 'text-white/80' : 'text-slate-700'}`}>
+            AI/ML Engineer <span className={darkMode ? 'text-white/20' : 'text-slate-300'}>|</span>{" "}
+            Generative AI <span className={darkMode ? 'text-white/20' : 'text-slate-300'}>|</span>{" "}
+            LLMs <span className={darkMode ? 'text-white/20' : 'text-slate-300'}>|</span>{" "}
+            RAG <span className={darkMode ? 'text-white/20' : 'text-slate-300'}>|</span>{" "}
+            AI Agents
+          </p>
 
-          <div className={`mt-5 sm:mt-6 h-7 sm:h-8 text-base sm:text-lg md:text-xl font-mono ${darkMode ? 'text-white/30' : 'text-slate-400'}`}>
+          <p className={`mt-5 sm:mt-6 max-w-2xl mx-auto leading-relaxed text-base sm:text-lg ${darkMode ? 'text-white/40' : 'text-slate-500'}`}>
+            Computer Science Engineer focused on building production-oriented AI/ML and
+            Generative AI systems, with hands-on experience in LLMs, RAG, AI agents,
+            machine learning, deep learning, and full-stack AI applications.
+          </p>
+
+          <div className={`mt-5 sm:mt-6 h-7 sm:h-8 text-sm sm:text-base md:text-lg font-mono ${darkMode ? 'text-white/30' : 'text-slate-400'}`}>
             <span className={darkMode ? 'text-cyan-400/70' : 'text-indigo-400'}>&gt; </span>
             <span>{typed}</span>
             <span className={`animate-pulse ${darkMode ? 'text-pink-400' : 'text-violet-500'}`}>█</span>
           </div>
 
-          <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
             <a href="#projects" className="neon-btn group text-center justify-center">
-              See What I&apos;ve Built
-              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
-                →
-              </span>
+              View Projects
+              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </a>
             <a
-              href="/Amruth_S_Sharma_Resume.pdf"
-              download
-              className={`border px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg font-bold transition-all duration-300 hover:shadow-lg text-center ${darkMode ? 'border-white/10 text-white/50 hover:border-pink-500/50 hover:text-pink-400 hover:shadow-pink-500/10' : 'border-slate-300 text-slate-500 hover:border-violet-400 hover:text-violet-600 hover:shadow-violet-200/50'}`}
+              href="https://github.com/amruthssss"
+              target="_blank"
+              rel="noreferrer"
+              className={`border px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg font-bold transition-all duration-300 hover:shadow-lg text-center ${darkMode ? 'border-white/10 text-white/60 hover:border-cyan-500/40 hover:text-cyan-400 hover:shadow-cyan-500/10' : 'border-slate-300 text-slate-600 hover:border-indigo-400 hover:text-indigo-600 hover:shadow-indigo-200/50'}`}
             >
-              Download Resume
+              GitHub
             </a>
-          </div>
-
-          <div className="mt-10 flex justify-center gap-4">
-            {[
-              {
-                href: "https://github.com/amruthssss",
-                label: "GitHub",
-                d: "M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z",
-              },
-              {
-                href: "https://linkedin.com/in/amruth-s-sharma-3412a12a7",
-                label: "LinkedIn",
-                d: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
-              },
-            ].map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                className="social-icon-neon"
-                aria-label={s.label}
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d={s.d} />
-                </svg>
-              </a>
-            ))}
             <a
-              href="mailto:amruthssharma.22cs@saividya.ac.in"
-              className="social-icon-neon"
-              aria-label="Email"
+              href="https://linkedin.com/in/amruthssharma"
+              target="_blank"
+              rel="noreferrer"
+              className={`border px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg font-bold transition-all duration-300 hover:shadow-lg text-center ${darkMode ? 'border-white/10 text-white/60 hover:border-pink-500/40 hover:text-pink-400 hover:shadow-pink-500/10' : 'border-slate-300 text-slate-600 hover:border-violet-400 hover:text-violet-600 hover:shadow-violet-200/50'}`}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
+              LinkedIn
+            </a>
+            <a
+              href="#contact"
+              className={`border px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg font-bold transition-all duration-300 hover:shadow-lg text-center ${darkMode ? 'border-white/10 text-white/60 hover:border-yellow-500/40 hover:text-yellow-400 hover:shadow-yellow-500/10' : 'border-slate-300 text-slate-600 hover:border-amber-400 hover:text-amber-600 hover:shadow-amber-200/50'}`}
+            >
+              Contact
             </a>
           </div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -572,12 +888,7 @@ export default function Portfolio() {
         variants={sectionReveal}
       >
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeUp}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
             <span className={`section-label ${darkMode ? 'text-cyan-400' : 'text-indigo-500'}`}>// about</span>
             <h2 className="section-heading">
               A bit about <span className={darkMode ? 'neon-text-cyan' : 'text-indigo-600'}>me</span>
@@ -586,33 +897,36 @@ export default function Portfolio() {
             <div className="grid md:grid-cols-5 gap-6 sm:gap-8 mt-8 sm:mt-10">
               <div className="md:col-span-3 space-y-4 sm:space-y-5">
                 <p className={`leading-relaxed text-base sm:text-lg ${darkMode ? 'text-white/40' : 'text-slate-600'}`}>
-                  I&apos;m a final-year{" "}
+                  I&apos;m a{" "}
                   <span className={`font-semibold ${darkMode ? 'text-cyan-400' : 'text-indigo-600'}`}>
                     Computer Science Engineering
                   </span>{" "}
-                  student who genuinely enjoys building things — whether
-                  it&apos;s a dashboard that makes data easier to understand,
-                  an API that just works, or a side project that taught me
-                  something new at 2 AM.
+                  graduate with a focus on{" "}
+                  <span className={`font-semibold ${darkMode ? 'text-pink-400' : 'text-violet-600'}`}>
+                    Generative AI, LLMs, RAG, and AI agents
+                  </span>
+                  . I like building systems end-to-end — from a retrieval pipeline
+                  and a multi-agent workflow down to the FastAPI backend and React
+                  frontend that ship it.
                 </p>
                 <p className={`leading-relaxed text-base sm:text-lg ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>
-                  I don&apos;t claim to know everything, but I pick things up
-                  quickly and I&apos;m not afraid to dive into unfamiliar
-                  territory. I&apos;ve worked with Python, cloud platforms,
-                  and a handful of frameworks — enough to know what I&apos;m
-                  doing, and enough to know there&apos;s always more to learn.
+                  My project work spans multi-agent platforms, real-time computer
+                  vision systems, and ML-driven analytics dashboards, built with
+                  Python, PyTorch, TensorFlow, LangChain/LangGraph, and PostgreSQL.
+                  I also spent time as an Android Developer Intern, shipping a
+                  full-stack learning app with a Gemini-powered AI tutor.
                 </p>
                 <p className={`leading-relaxed text-base sm:text-lg ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>
-                  Right now, I&apos;m looking for a role where I can contribute
-                  meaningfully, grow alongside a good team, and keep getting
-                  better at what I do.
+                  I&apos;m currently looking for AI/ML and Generative AI engineering
+                  roles where I can keep building production-oriented systems and
+                  grow alongside a strong team.
                 </p>
               </div>
               <div className="md:col-span-2 space-y-3 sm:space-y-5">
                 {[
-                  { label: "Status", value: "Actively seeking roles", icon: "🟢" },
+                  { label: "Focus", value: "AI/ML · Generative AI · LLMs · RAG", icon: "🧠" },
                   { label: "Location", value: "Bengaluru, India", icon: "📍" },
-                  { label: "University", value: "SVIT", icon: "🎓" },
+                  { label: "University", value: "Sai Vidya Institute of Technology", icon: "🎓" },
                   { label: "Degree", value: "B.E. in CSE (2022–2026)", icon: "📜" },
                 ].map((item) => (
                   <div
@@ -651,7 +965,6 @@ export default function Portfolio() {
           </h2>
 
           <div className="relative mt-10">
-            {/* Neon line */}
             <div className={`absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b ${darkMode ? 'from-green-400 to-green-400/10 shadow-[0_0_8px_rgba(74,222,128,0.3)]' : 'from-emerald-400 to-emerald-400/10'}`} />
 
             <motion.div
@@ -661,39 +974,44 @@ export default function Portfolio() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {/* Dot */}
               <div className={`absolute left-[10px] sm:left-[18px] top-6 sm:top-8 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-400 shadow-lg shadow-green-400/50 ring-4 ${darkMode ? 'ring-black' : 'ring-zinc-50'}`} />
 
               <div className={`rounded-xl sm:rounded-2xl p-5 sm:p-8 border transition-all duration-500 hover:shadow-lg ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-green-500/30 hover:shadow-green-500/5' : 'bg-white border-slate-200 hover:border-emerald-300 hover:shadow-emerald-100/50'}`}>
                 <div className="flex flex-wrap gap-3 mb-4">
                   <span className={`text-xs font-mono px-3 py-1 rounded-full border ${darkMode ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-emerald-50 text-emerald-600 border-emerald-200'}`}>
-                    Current · 2025
+                    {experience.period}
                   </span>
                   <span className={`text-xs font-mono px-3 py-1 rounded-full border ${darkMode ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-indigo-50 text-indigo-600 border-indigo-200'}`}>
                     Internship
                   </span>
+                  <span className={`text-xs font-mono px-3 py-1 rounded-full border ${darkMode ? 'bg-white/5 text-white/40 border-white/10' : 'bg-slate-50 text-slate-500 border-slate-200'}`}>
+                    {experience.location}
+                  </span>
                 </div>
-                <h3 className={`text-xl font-bold ${darkMode ? 'text-white/80' : 'text-slate-800'}`}>
-                  Android Developer (Gen AI)
-                </h3>
+                <h3 className={`text-xl font-bold ${darkMode ? 'text-white/80' : 'text-slate-800'}`}>{experience.role}</h3>
                 <a
-                  href="https://makes.mindmatrix.io/"
+                  href={experience.companyUrl}
                   target="_blank"
                   rel="noreferrer"
                   className={`inline-flex items-center gap-1.5 mt-1 text-sm font-medium transition-colors ${darkMode ? 'text-green-400 hover:text-green-300' : 'text-emerald-600 hover:text-emerald-500'}`}
                 >
-                  MindMatrix
+                  {experience.company}
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </a>
-                <p className={`mt-4 leading-relaxed ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>
-                  Working on Android development powered by Generative AI. Building
-                  features that bring AI capabilities into mobile experiences — still
-                  early, still figuring things out, but learning something new every day.
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {["Android", "Gen AI", "Kotlin", "Mobile Dev"].map((t) => (
+
+                <ul className="mt-4 space-y-2.5">
+                  {experience.bullets.map((b, i) => (
+                    <li key={i} className={`flex gap-2.5 leading-relaxed text-sm sm:text-base ${darkMode ? 'text-white/40' : 'text-slate-500'}`}>
+                      <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${darkMode ? 'bg-green-400' : 'bg-emerald-500'}`} />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex flex-wrap gap-2 mt-5">
+                  {experience.tags.map((t) => (
                     <span
                       key={t}
                       className={`text-xs font-mono px-2.5 py-1 rounded border ${darkMode ? 'bg-green-500/5 text-green-400/60 border-green-500/10' : 'bg-emerald-50 text-emerald-600/70 border-emerald-200'}`}
@@ -719,17 +1037,12 @@ export default function Portfolio() {
       >
         <div className={`absolute inset-0 bg-gradient-to-b from-transparent to-transparent ${darkMode ? 'via-cyan-500/[0.02]' : 'via-indigo-500/[0.03]'}`} />
         <div className="max-w-5xl mx-auto relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={stagger}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <motion.span variants={fadeUp} className={`section-label ${darkMode ? 'text-pink-400' : 'text-violet-500'}`}>
               // skills
             </motion.span>
             <motion.h2 variants={fadeUp} className="section-heading">
-              Tools I&apos;m <span className={darkMode ? 'neon-text-pink' : 'text-violet-600'}>comfortable with</span>
+              Technical <span className={darkMode ? 'neon-text-pink' : 'text-violet-600'}>skills</span>
             </motion.h2>
 
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mt-8 sm:mt-10">
@@ -775,30 +1088,33 @@ export default function Portfolio() {
         variants={sectionReveal}
       >
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.span variants={fadeUp} className={`section-label ${darkMode ? 'text-green-400' : 'text-teal-500'}`}>
               // projects
             </motion.span>
             <motion.h2 variants={fadeUp} className="section-heading">
-              Projects I&apos;ve <span className={darkMode ? 'neon-text-green' : 'text-teal-600'}>worked on</span>
+              Featured <span className={darkMode ? 'neon-text-green' : 'text-teal-600'}>projects</span>
             </motion.h2>
+            <motion.p variants={fadeUp} className={`mt-3 max-w-2xl text-sm sm:text-base ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>
+              Click any project for the full breakdown — problem, solution, architecture, and results.
+            </motion.p>
 
             <div className="space-y-4 sm:space-y-5 mt-8 sm:mt-10">
               {projects.map((proj, pi) => (
-                <motion.a
+                <motion.div
                   key={proj.title}
-                  href={proj.github}
-                  target="_blank"
-                  rel="noreferrer"
                   custom={pi}
                   variants={fadeUp}
                   whileHover={{ x: 6 }}
-                  className={`group block rounded-xl sm:rounded-2xl border p-5 sm:p-8 transition-all duration-500 hover:shadow-lg ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-cyan-500/30 hover:shadow-cyan-500/5' : 'bg-white border-slate-200 shadow-sm hover:border-indigo-200 hover:shadow-indigo-100/40'}`}
+                  onClick={() => setActiveProject(proj)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActiveProject(proj)}
+                  className={`group block cursor-pointer rounded-xl sm:rounded-2xl border p-5 sm:p-8 transition-all duration-500 hover:shadow-lg ${
+                    proj.featured
+                      ? darkMode ? 'bg-white/[0.03] border-cyan-500/20 hover:border-cyan-500/40 hover:shadow-cyan-500/10' : 'bg-white border-indigo-200 shadow-sm hover:border-indigo-300 hover:shadow-indigo-100/50'
+                      : darkMode ? 'bg-white/[0.02] border-white/5 hover:border-cyan-500/30 hover:shadow-cyan-500/5' : 'bg-white border-slate-200 shadow-sm hover:border-indigo-200 hover:shadow-indigo-100/40'
+                  }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
                     <span className={`text-4xl sm:text-6xl font-black transition-colors font-mono shrink-0 leading-none ${darkMode ? 'text-white/[0.04] group-hover:text-cyan-500/10' : 'text-slate-100 group-hover:text-indigo-100'}`}>
@@ -806,25 +1122,22 @@ export default function Portfolio() {
                     </span>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-3">
+                      <div className="flex flex-wrap items-center gap-3 mb-1">
                         <h3 className={`text-lg sm:text-xl font-bold transition-colors ${darkMode ? 'text-white/80 group-hover:text-cyan-400' : 'text-slate-800 group-hover:text-indigo-600'}`}>
                           {proj.title}
                         </h3>
-                        <svg
-                          className={`w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0 ${darkMode ? 'text-white/10 group-hover:text-cyan-400' : 'text-slate-300 group-hover:text-indigo-500'}`}
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-                        </svg>
+                        {proj.featured && (
+                          <span className={`text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full border ${darkMode ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-indigo-50 text-indigo-600 border-indigo-200'}`}>
+                            Featured
+                          </span>
+                        )}
                       </div>
+                      <p className={`text-xs font-mono mb-3 ${darkMode ? 'text-white/20' : 'text-slate-400'}`}>{proj.date}</p>
                       <p className={`leading-relaxed mb-4 ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>
                         {proj.description}
                       </p>
-                      <div className="flex flex-wrap gap-2">
-                        {proj.tech.map((t) => (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {proj.tech.slice(0, 6).map((t) => (
                           <span
                             key={t}
                             className={`text-xs font-mono px-2.5 py-1 rounded border ${darkMode ? 'bg-cyan-500/5 text-cyan-400/60 border-cyan-500/10' : 'bg-teal-50 text-teal-600/70 border-teal-200'}`}
@@ -832,10 +1145,73 @@ export default function Portfolio() {
                             {t}
                           </span>
                         ))}
+                        {proj.tech.length > 6 && (
+                          <span className={`text-xs font-mono px-2.5 py-1 rounded border ${darkMode ? 'bg-white/[0.02] text-white/30 border-white/5' : 'bg-slate-50 text-slate-400 border-slate-200'}`}>
+                            +{proj.tech.length - 6} more
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap items-center gap-4">
+                        <a
+                          href={proj.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${darkMode ? 'text-white/50 hover:text-cyan-400' : 'text-slate-600 hover:text-indigo-600'}`}
+                        >
+                          GitHub ↗
+                        </a>
+                        <span
+                          className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${darkMode ? 'text-cyan-400/60 group-hover:text-cyan-400' : 'text-indigo-500/70 group-hover:text-indigo-600'}`}
+                        >
+                          View details →
+                        </span>
                       </div>
                     </div>
                   </div>
-                </motion.a>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ── Certifications ── */}
+      <motion.section
+        id="certifications"
+        className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 relative"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        variants={sectionReveal}
+      >
+        <div className={`absolute inset-0 bg-gradient-to-b from-transparent to-transparent ${darkMode ? 'via-yellow-500/[0.02]' : 'via-amber-500/[0.03]'}`} />
+        <div className="max-w-5xl mx-auto relative z-10">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+            <motion.span variants={fadeUp} className={`section-label ${darkMode ? 'text-yellow-400' : 'text-amber-500'}`}>
+              // certifications
+            </motion.span>
+            <motion.h2 variants={fadeUp} className="section-heading">
+              Certifications &amp; <span className={darkMode ? 'neon-text-yellow' : 'text-amber-600'}>courses</span>
+            </motion.h2>
+
+            <div className="grid sm:grid-cols-2 gap-4 mt-8 sm:mt-10">
+              {certifications.map((cert, ci) => (
+                <motion.div
+                  key={cert.name}
+                  custom={ci}
+                  variants={fadeUp}
+                  className={`flex items-start gap-4 rounded-xl p-5 border transition-all duration-300 ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-yellow-500/20 hover:bg-white/[0.04]' : 'bg-white border-slate-200 hover:border-amber-200 hover:shadow-md hover:shadow-amber-100/40'}`}
+                >
+                  <span className="text-2xl mt-0.5">🏆</span>
+                  <div>
+                    <p className={`font-semibold leading-snug ${darkMode ? 'text-white/80' : 'text-slate-800'}`}>{cert.name}</p>
+                    <p className={`text-sm mt-1 ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>{cert.org}</p>
+                    <span className={`inline-block mt-2 text-xs font-mono px-2.5 py-1 rounded-full border ${darkMode ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 'bg-amber-50 text-amber-600 border-amber-200'}`}>
+                      {cert.year}
+                    </span>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -853,23 +1229,16 @@ export default function Portfolio() {
       >
         <div className={`absolute inset-0 bg-gradient-to-b from-transparent to-transparent ${darkMode ? 'via-pink-500/[0.02]' : 'via-amber-500/[0.03]'}`} />
         <div className="max-w-5xl mx-auto relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeUp}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
             <span className={`section-label ${darkMode ? 'text-yellow-400' : 'text-amber-500'}`}>// education</span>
             <h2 className="section-heading">
               Where I <span className={darkMode ? 'neon-text-yellow' : 'text-amber-600'}>studied</span>
             </h2>
 
             <div className="relative mt-10">
-              {/* Neon line */}
               <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px neon-line" />
 
               <div className="relative pl-10 sm:pl-16">
-                {/* Dot */}
                 <div className={`absolute left-[10px] sm:left-[18px] top-6 sm:top-8 w-3 h-3 sm:w-4 sm:h-4 rounded-full shadow-lg ring-4 ${darkMode ? 'bg-pink-500 shadow-pink-500/50 ring-black' : 'bg-amber-500 shadow-amber-500/30 ring-[#faf8f5]'}`} />
 
                 <div className={`rounded-xl sm:rounded-2xl p-5 sm:p-8 border transition-all duration-500 hover:shadow-lg ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-pink-500/30 hover:shadow-pink-500/5' : 'bg-white border-slate-200 shadow-sm hover:border-amber-200 hover:shadow-amber-100/40'}`}>
@@ -878,7 +1247,7 @@ export default function Portfolio() {
                       2022 – 2026
                     </span>
                     <span className={`text-xs font-mono px-3 py-1 rounded-full border ${darkMode ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-indigo-50 text-indigo-600 border-indigo-200'}`}>
-                      CGPA: 8.0 / 10
+                      CGPA: 8.2 / 10.0
                     </span>
                   </div>
                   <h3 className={`text-xl font-bold ${darkMode ? 'text-white/80' : 'text-slate-800'}`}>
@@ -887,6 +1256,16 @@ export default function Portfolio() {
                   <p className={`mt-2 ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>
                     Sai Vidya Institute of Technology, Bengaluru
                   </p>
+                  <div className="flex flex-wrap gap-2 mt-5">
+                    {coursework.map((c) => (
+                      <span
+                        key={c}
+                        className={`text-xs font-mono px-2.5 py-1 rounded border ${darkMode ? 'bg-pink-500/5 text-pink-400/60 border-pink-500/10' : 'bg-amber-50 text-amber-600/70 border-amber-200'}`}
+                      >
+                        {c}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -904,12 +1283,7 @@ export default function Portfolio() {
         variants={sectionReveal}
       >
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeUp}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
             <span className={`section-label ${darkMode ? 'text-cyan-400' : 'text-indigo-500'}`}>// contact</span>
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight mb-6">
               <span className={darkMode ? 'text-white/90' : 'text-slate-800'}>I&apos;d love to</span>
@@ -917,23 +1291,50 @@ export default function Portfolio() {
               <span className={darkMode ? 'neon-text-gradient' : 'light-name-gradient'}>hear from you.</span>
             </h2>
             <p className={`mb-8 text-lg max-w-xl mx-auto ${darkMode ? 'text-white/30' : 'text-slate-500'}`}>
-              Whether it&apos;s a job opportunity, a freelance gig, or just a
-              conversation about tech — I&apos;m always happy to connect.
-              I&apos;m actively looking for roles where I can learn and
-              contribute.
+              Whether it&apos;s an AI/ML role, a Generative AI project, or just a
+              conversation about LLMs and agents — I&apos;m always happy to connect.
+              I&apos;m actively looking for opportunities to build and ship.
             </p>
-            <p className={`mb-12 text-sm max-w-md mx-auto font-mono ${darkMode ? 'text-white/20' : 'text-slate-400'}`}>
-              Seriously, even if you just want to say hi — my inbox is open.
-            </p>
-            <a
-              href="mailto:amruthssharma.22cs@saividya.ac.in"
-              className="neon-btn-lg group"
-            >
+
+            <a href="mailto:amruths604@gmail.com" className="neon-btn-lg group">
               Get In Touch
-              <span className="group-hover:rotate-12 transition-transform text-xl ml-3">
-                ✉️
-              </span>
+              <span className="group-hover:rotate-12 transition-transform text-xl ml-3">✉️</span>
             </a>
+
+            <div className="mt-10 grid sm:grid-cols-2 gap-3 max-w-xl mx-auto text-left">
+              <a
+                href="mailto:amruths604@gmail.com"
+                className={`flex items-center gap-3 rounded-xl p-4 border transition-all duration-300 ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-cyan-500/20 hover:bg-white/[0.04]' : 'bg-white border-slate-200 hover:border-indigo-200 hover:shadow-md'}`}
+              >
+                <span className="text-xl">📧</span>
+                <span className={`text-sm font-medium truncate ${darkMode ? 'text-white/60' : 'text-slate-600'}`}>amruths604@gmail.com</span>
+              </a>
+              <a
+                href="tel:+918050495260"
+                className={`flex items-center gap-3 rounded-xl p-4 border transition-all duration-300 ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-green-500/20 hover:bg-white/[0.04]' : 'bg-white border-slate-200 hover:border-emerald-200 hover:shadow-md'}`}
+              >
+                <span className="text-xl">📱</span>
+                <span className={`text-sm font-medium ${darkMode ? 'text-white/60' : 'text-slate-600'}`}>+91 80504 95260</span>
+              </a>
+              <a
+                href="https://linkedin.com/in/amruthssharma"
+                target="_blank"
+                rel="noreferrer"
+                className={`flex items-center gap-3 rounded-xl p-4 border transition-all duration-300 ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-pink-500/20 hover:bg-white/[0.04]' : 'bg-white border-slate-200 hover:border-violet-200 hover:shadow-md'}`}
+              >
+                <span className="text-xl">💼</span>
+                <span className={`text-sm font-medium ${darkMode ? 'text-white/60' : 'text-slate-600'}`}>linkedin.com/in/amruthssharma</span>
+              </a>
+              <a
+                href="https://github.com/amruthssss"
+                target="_blank"
+                rel="noreferrer"
+                className={`flex items-center gap-3 rounded-xl p-4 border transition-all duration-300 ${darkMode ? 'bg-white/[0.02] border-white/5 hover:border-yellow-500/20 hover:bg-white/[0.04]' : 'bg-white border-slate-200 hover:border-amber-200 hover:shadow-md'}`}
+              >
+                <span className="text-xl">💻</span>
+                <span className={`text-sm font-medium ${darkMode ? 'text-white/60' : 'text-slate-600'}`}>github.com/amruthssss</span>
+              </a>
+            </div>
           </motion.div>
         </div>
       </motion.section>
@@ -950,14 +1351,8 @@ export default function Portfolio() {
           <div className="flex gap-5">
             {[
               { label: "GitHub", href: "https://github.com/amruthssss" },
-              {
-                label: "LinkedIn",
-                href: "https://linkedin.com/in/amruth-s-sharma-3412a12a7",
-              },
-              {
-                label: "Email",
-                href: "mailto:amruthssharma.22cs@saividya.ac.in",
-              },
+              { label: "LinkedIn", href: "https://linkedin.com/in/amruthssharma" },
+              { label: "Email", href: "mailto:amruths604@gmail.com" },
             ].map((link) => (
               <a
                 key={link.label}
