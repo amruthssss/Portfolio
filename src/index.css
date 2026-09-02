@@ -27,6 +27,7 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 a, button { cursor: none; }
@@ -119,6 +120,12 @@ a, button { cursor: none; }
   box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
 }
 
+.neon-btn:hover,
+.neon-btn-sm:hover,
+.neon-btn-lg:hover {
+  transform: translateY(-1px);
+}
+
 .neon-btn-sm {
   display: inline-flex;
   align-items: center;
@@ -169,6 +176,29 @@ a, button { cursor: none; }
 .light-mode .neon-btn-lg:hover {
   box-shadow: 0 8px 25px rgba(79, 70, 229, 0.45);
   transform: translateY(-2px);
+}
+
+.futuristic-link {
+  position: relative;
+}
+
+.futuristic-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.futuristic-link:hover::after,
+.futuristic-link:focus-visible::after {
+  transform: scaleX(1);
 }
 
 /* ── Social icons ── */
@@ -288,6 +318,11 @@ a:focus-visible, button:focus-visible {
   scroll-margin-top: 80px;
 }
 
+.modal-scroll-area {
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
 /* ── Card lift effect ── */
 .light-mode .card-lift {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -295,4 +330,17 @@ a:focus-visible, button:focus-visible {
 .light-mode .card-lift:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html, a, button {
+    cursor: auto !important;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

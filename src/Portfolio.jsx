@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useSpring, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 /* ── Data ── */
@@ -327,11 +327,13 @@ const neon = {
 
 /* ── Animation variants ── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 28, scale: 0.985, filter: "blur(8px)" },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.12, ease: "easeOut" },
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.62, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
@@ -341,11 +343,13 @@ const stagger = {
 };
 
 const sectionReveal = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 42, scale: 0.985, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -380,17 +384,121 @@ function useTypewriter(words, speed = 90, pause = 2000) {
   return text;
 }
 
+function PipelineNode({ label, darkMode, highlight = false }) {
+  return (
+    <div
+      className={`relative rounded-xl border px-3 py-2 text-center text-[11px] sm:text-xs font-mono tracking-wide transition-colors ${
+        highlight
+          ? darkMode
+            ? "bg-pink-500/10 text-pink-300 border-pink-400/35 shadow-[0_0_20px_rgba(236,72,153,0.18)]"
+            : "bg-violet-50 text-violet-700 border-violet-300"
+          : darkMode
+            ? "bg-white/[0.03] text-white/70 border-white/10"
+            : "bg-slate-50 text-slate-700 border-slate-200"
+      }`}
+    >
+      {label}
+    </div>
+  );
+}
+
+function FlowConnector({ darkMode, reducedMotion }) {
+  return (
+    <div className="relative h-6 sm:h-7 flex items-center justify-center" aria-hidden="true">
+      <span className={`h-full w-px ${darkMode ? "bg-cyan-400/30" : "bg-indigo-300"}`} />
+      {!reducedMotion && (
+        <motion.span
+          className={`absolute w-2 h-2 rounded-full ${darkMode ? "bg-cyan-300" : "bg-indigo-500"}`}
+          animate={{ y: ["-45%", "45%"], opacity: [0.25, 1, 0.25] }}
+          transition={{ repeat: Infinity, duration: 1.7, ease: "easeInOut" }}
+        />
+      )}
+    </div>
+  );
+}
+
+function ProjectArchitectureFlow({ projectTitle, darkMode, reducedMotion }) {
+  if (projectTitle === "Orbit AI Engineering Platform") {
+    return (
+      <div className={`mt-5 rounded-2xl border p-3 sm:p-5 ${darkMode ? "bg-black/30 border-cyan-500/20" : "bg-white border-indigo-200"}`}>
+        <div className="max-w-xl mx-auto">
+          <PipelineNode label="USER" darkMode={darkMode} />
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <PipelineNode label="REACT / TS" darkMode={darkMode} />
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <PipelineNode label="FASTAPI" darkMode={darkMode} />
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <PipelineNode label="RAG" darkMode={darkMode} />
+            <PipelineNode label="AGENTS" darkMode={darkMode} />
+            <PipelineNode label="WORKFLOWS" darkMode={darkMode} />
+          </div>
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <PipelineNode label="EMBEDDINGS" darkMode={darkMode} />
+            <PipelineNode label="TOOLS" darkMode={darkMode} />
+            <PipelineNode label="EXECUTION" darkMode={darkMode} />
+          </div>
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <PipelineNode label="VECTOR SEARCH" darkMode={darkMode} />
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <PipelineNode label="RERANKING" darkMode={darkMode} />
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <PipelineNode label="GROUNDED LLM RESPONSE" darkMode={darkMode} />
+          <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />
+          <PipelineNode label="CITATIONS" darkMode={darkMode} />
+        </div>
+      </div>
+    );
+  }
+
+  if (projectTitle === "LaunchPad AI") {
+    const stages = [
+      "STARTUP IDEA",
+      "MARKET RESEARCH",
+      "ARCHITECTURE",
+      "CODE GENERATION",
+      "CRITIC AGENT",
+      "RETRY ROUTING",
+      "RAG GROUNDING",
+      "FORECASTING",
+      "FINAL OUTPUT",
+    ];
+    return (
+      <div className={`mt-5 rounded-2xl border p-3 sm:p-5 ${darkMode ? "bg-black/30 border-cyan-500/20" : "bg-white border-indigo-200"}`}>
+        <div className="max-w-xl mx-auto">
+          {stages.map((stage, index) => (
+            <div key={stage}>
+              <PipelineNode label={stage} darkMode={darkMode} highlight={stage === "CRITIC AGENT"} />
+              {index < stages.length - 1 && <FlowConnector darkMode={darkMode} reducedMotion={reducedMotion} />}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 /* ── Project detail modal ── */
-function ProjectModal({ project, onClose, darkMode }) {
+function ProjectModal({ project, onClose, darkMode, reducedMotion }) {
   const ref = useRef(null);
 
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalBodyTouchAction = document.body.style.touchAction;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+    document.documentElement.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalBodyOverflow;
+      document.body.style.touchAction = originalBodyTouchAction;
+      document.documentElement.style.overflow = originalHtmlOverflow;
     };
   }, [onClose]);
 
@@ -401,123 +509,144 @@ function ProjectModal({ project, onClose, darkMode }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[90] flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto"
+      transition={{ duration: reducedMotion ? 0.01 : 0.28, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-0 z-[90] flex items-center justify-center p-3 sm:p-6"
       onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
     >
-      <div className={`absolute inset-0 ${darkMode ? "bg-black/80" : "bg-slate-900/40"} backdrop-blur-sm`} />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: reducedMotion ? 0.01 : 0.26 }}
+        className={`absolute inset-0 ${darkMode ? "bg-black/82" : "bg-slate-900/45"} backdrop-blur-sm`}
+      />
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 30, scale: 0.97 }}
+        initial={{ opacity: 0, y: reducedMotion ? 0 : 15, scale: reducedMotion ? 1 : 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 20, scale: 0.97 }}
-        transition={{ type: "spring", stiffness: 300, damping: 28 }}
-        className={`relative z-10 w-full max-w-3xl my-8 sm:my-12 rounded-2xl border p-5 sm:p-10 ${
+        exit={{ opacity: 0, y: reducedMotion ? 0 : 15, scale: reducedMotion ? 1 : 0.98 }}
+        transition={{ duration: reducedMotion ? 0.01 : 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className={`relative z-10 w-full max-w-3xl max-h-[90vh] overflow-hidden rounded-2xl border flex flex-col ${
           darkMode ? "bg-black border-white/10" : "bg-white border-slate-200"
         }`}
       >
-        <button
-          onClick={onClose}
-          aria-label="Close"
-          className={`absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center border transition-colors ${
-            darkMode ? "border-white/10 text-white/50 hover:text-cyan-400 hover:border-cyan-500/30" : "border-slate-200 text-slate-500 hover:text-indigo-600 hover:border-indigo-300"
-          }`}
-        >
-          ✕
-        </button>
-
-        <p className={`text-xs font-mono tracking-widest ${darkMode ? "text-cyan-400/70" : "text-indigo-500"}`}>{project.date}</p>
-        <h3 className={`mt-2 text-2xl sm:text-3xl font-black leading-tight ${darkMode ? "text-white" : "text-slate-800"}`}>
-          {project.title}
-        </h3>
-        <p className={`mt-4 leading-relaxed ${darkMode ? "text-white/50" : "text-slate-600"}`}>{project.description}</p>
-
-        <div className="mt-8 grid sm:grid-cols-2 gap-6 sm:gap-8">
-          <div>
-            <h4 className={`section-label mb-2 ${darkMode ? "text-pink-400" : "text-violet-500"}`}>// problem</h4>
-            <p className={`text-sm leading-relaxed ${darkMode ? "text-white/40" : "text-slate-500"}`}>{project.problem}</p>
+        <div className={`sticky top-0 z-20 flex items-start justify-between gap-3 border-b px-4 sm:px-7 py-4 sm:py-5 ${
+          darkMode ? "bg-black/90 border-white/10 backdrop-blur-xl" : "bg-white/95 border-slate-200 backdrop-blur-xl"
+        }`}>
+          <div className="min-w-0">
+            <p className={`text-xs font-mono tracking-widest ${darkMode ? "text-cyan-400/70" : "text-indigo-500"}`}>{project.date}</p>
+            <h3 id="project-modal-title" className={`mt-2 text-xl sm:text-2xl font-black leading-tight break-words ${darkMode ? "text-white" : "text-slate-800"}`}>
+              {project.title}
+            </h3>
           </div>
-          <div>
-            <h4 className={`section-label mb-2 ${darkMode ? "text-green-400" : "text-emerald-500"}`}>// solution</h4>
-            <p className={`text-sm leading-relaxed ${darkMode ? "text-white/40" : "text-slate-500"}`}>{project.solution}</p>
-          </div>
+          <button
+            onClick={onClose}
+            aria-label="Close project details"
+            className={`group shrink-0 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center border transition-all duration-200 focus-visible:outline-offset-2 ${
+              darkMode
+                ? "border-white/15 text-white/65 hover:text-cyan-300 hover:border-cyan-400/45 hover:bg-cyan-500/10 focus-visible:outline-cyan-400"
+                : "border-slate-300 text-slate-600 hover:text-indigo-600 hover:border-indigo-400 hover:bg-indigo-50 focus-visible:outline-indigo-500"
+            }`}
+          >
+            <span className="text-lg leading-none transition-transform duration-200 group-hover:scale-110 group-hover:rotate-90">✕</span>
+          </button>
         </div>
 
-        <div className="mt-8">
-          <h4 className={`section-label mb-3 ${darkMode ? "text-cyan-400" : "text-indigo-500"}`}>// architecture &amp; workflow</h4>
-          <ol className="space-y-2">
-            {project.architecture.map((step, i) => (
-              <li key={i} className={`flex gap-3 text-sm leading-relaxed ${darkMode ? "text-white/50" : "text-slate-600"}`}>
-                <span className={`font-mono shrink-0 ${darkMode ? "text-cyan-400/60" : "text-indigo-400"}`}>{String(i + 1).padStart(2, "0")}</span>
-                <span>{step}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <div className="modal-scroll-area flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-4 sm:px-7 pb-6 sm:pb-8 pt-4 sm:pt-6">
+          <p className={`leading-relaxed break-words ${darkMode ? "text-white/50" : "text-slate-600"}`}>{project.description}</p>
 
-        <div className="mt-8">
-          <h4 className={`section-label mb-3 ${darkMode ? "text-yellow-400" : "text-amber-500"}`}>// key features</h4>
-          <div className="flex flex-wrap gap-2">
-            {project.features.map((f) => (
-              <span
-                key={f}
-                className={`text-xs font-medium px-3 py-1.5 rounded-lg border ${
-                  darkMode ? "bg-white/[0.03] text-white/60 border-white/10" : "bg-slate-50 text-slate-600 border-slate-200"
-                }`}
-              >
-                {f}
-              </span>
-            ))}
+          <div className="mt-8 grid sm:grid-cols-2 gap-6 sm:gap-8">
+            <div>
+              <h4 className={`section-label mb-2 ${darkMode ? "text-pink-400" : "text-violet-500"}`}>// problem</h4>
+              <p className={`text-sm leading-relaxed break-words ${darkMode ? "text-white/40" : "text-slate-500"}`}>{project.problem}</p>
+            </div>
+            <div>
+              <h4 className={`section-label mb-2 ${darkMode ? "text-green-400" : "text-emerald-500"}`}>// solution</h4>
+              <p className={`text-sm leading-relaxed break-words ${darkMode ? "text-white/40" : "text-slate-500"}`}>{project.solution}</p>
+            </div>
           </div>
-        </div>
 
-        <div className="mt-8">
-          <h4 className={`section-label mb-3 ${darkMode ? "text-cyan-400" : "text-indigo-500"}`}>// technologies</h4>
-          <div className="flex flex-wrap gap-2">
-            {project.tech.map((t) => (
-              <span
-                key={t}
-                className={`text-xs font-mono px-2.5 py-1 rounded border ${
-                  darkMode ? "bg-cyan-500/5 text-cyan-400/70 border-cyan-500/10" : "bg-indigo-50 text-indigo-600/80 border-indigo-200"
-                }`}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {project.metrics && project.metrics.length > 0 && (
           <div className="mt-8">
-            <h4 className={`section-label mb-3 ${darkMode ? "text-green-400" : "text-emerald-500"}`}>// results &amp; notes</h4>
-            <ul className="grid sm:grid-cols-2 gap-2">
-              {project.metrics.map((m) => (
-                <li
-                  key={m}
-                  className={`text-sm rounded-lg px-4 py-2.5 border ${
-                    darkMode ? "bg-green-500/5 text-green-300/80 border-green-500/10" : "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  }`}
-                >
-                  {m}
+            <h4 className={`section-label mb-3 ${darkMode ? "text-cyan-400" : "text-indigo-500"}`}>// architecture &amp; workflow</h4>
+            <ProjectArchitectureFlow projectTitle={project.title} darkMode={darkMode} reducedMotion={reducedMotion} />
+            <ol className="mt-5 space-y-2">
+              {project.architecture.map((step, i) => (
+                <li key={i} className={`flex gap-3 text-sm leading-relaxed break-words ${darkMode ? "text-white/50" : "text-slate-600"}`}>
+                  <span className={`font-mono shrink-0 ${darkMode ? "text-cyan-400/60" : "text-indigo-400"}`}>{String(i + 1).padStart(2, "0")}</span>
+                  <span>{step}</span>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
-        )}
 
-        <div className="mt-10 flex flex-wrap gap-3">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="neon-btn-sm !py-2.5 !px-5"
-          >
-            View on GitHub ↗
-          </a>
-          {project.demo && (
-            <a href={project.demo} target="_blank" rel="noreferrer" className="neon-btn-sm !py-2.5 !px-5">
-              Live Demo ↗
-            </a>
+          <div className="mt-8">
+            <h4 className={`section-label mb-3 ${darkMode ? "text-yellow-400" : "text-amber-500"}`}>// key features</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.features.map((f) => (
+                <span
+                  key={f}
+                  className={`text-xs font-medium px-3 py-1.5 rounded-lg border transition-colors ${
+                    darkMode ? "bg-white/[0.03] text-white/60 border-white/10 hover:border-cyan-500/30" : "bg-slate-50 text-slate-600 border-slate-200 hover:border-indigo-300"
+                  }`}
+                >
+                  {f}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h4 className={`section-label mb-3 ${darkMode ? "text-cyan-400" : "text-indigo-500"}`}>// technologies</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className={`text-xs font-mono px-2.5 py-1 rounded border transition-colors ${
+                    darkMode ? "bg-cyan-500/5 text-cyan-400/70 border-cyan-500/10 hover:border-cyan-400/40" : "bg-indigo-50 text-indigo-600/80 border-indigo-200 hover:border-indigo-400"
+                  }`}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {project.metrics && project.metrics.length > 0 && (
+            <div className="mt-8">
+              <h4 className={`section-label mb-3 ${darkMode ? "text-green-400" : "text-emerald-500"}`}>// results &amp; notes</h4>
+              <ul className="grid sm:grid-cols-2 gap-2">
+                {project.metrics.map((m) => (
+                  <li
+                    key={m}
+                    className={`text-sm rounded-lg px-4 py-2.5 border ${
+                      darkMode ? "bg-green-500/5 text-green-300/80 border-green-500/10" : "bg-emerald-50 text-emerald-700 border-emerald-200"
+                    }`}
+                  >
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
+
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              className="neon-btn-sm !py-2.5 !px-5 group"
+            >
+              View on GitHub <span className="inline-block transition-transform group-hover:translate-x-0.5">↗</span>
+            </a>
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noreferrer" className="neon-btn-sm !py-2.5 !px-5 group">
+                Live Demo <span className="inline-block transition-transform group-hover:translate-x-0.5">↗</span>
+              </a>
+            )}
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -533,6 +662,7 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeProject, setActiveProject] = useState(null);
+  const prefersReducedMotion = useReducedMotion();
   const typed = useTypewriter(
     [
       "Building with LLMs, RAG & AI Agents.",
@@ -609,22 +739,30 @@ export default function Portfolio() {
     : "bg-[#faf8f5] text-slate-900 light-mode";
 
   return (
-    <div className={`min-h-screen font-sans scroll-smooth transition-colors duration-500 ${themeClasses} ${darkMode ? 'selection:bg-cyan-500/30 selection:text-white' : 'selection:bg-cyan-500/20 selection:text-cyan-900'}`}>
+    <div className={`min-h-screen overflow-x-clip font-sans scroll-smooth transition-colors duration-500 ${themeClasses} ${darkMode ? 'selection:bg-cyan-500/30 selection:text-white' : 'selection:bg-cyan-500/20 selection:text-cyan-900'}`}>
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div className={`absolute inset-0 ${darkMode ? "bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.09),transparent_45%),radial-gradient(circle_at_82%_18%,rgba(168,85,247,0.08),transparent_40%),radial-gradient(circle_at_50%_78%,rgba(34,197,94,0.05),transparent_45%)]" : "bg-[radial-gradient(circle_at_20%_20%,rgba(79,70,229,0.11),transparent_45%),radial-gradient(circle_at_80%_15%,rgba(236,72,153,0.08),transparent_40%),radial-gradient(circle_at_50%_80%,rgba(45,212,191,0.08),transparent_45%)]"}`} />
+        <div className={`absolute inset-0 opacity-[0.15] ${darkMode ? "bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)]" : "bg-[linear-gradient(rgba(15,23,42,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.08)_1px,transparent_1px)]"} bg-[size:44px_44px]`} />
+      </div>
       {/* ── Custom cursor (desktop only) ── */}
-      <motion.div
-        className="hidden lg:block fixed top-0 left-0 z-[100] pointer-events-none"
-        animate={{ x: cursorPos.x - 4, y: cursorPos.y - 4 }}
-        transition={{ type: "spring", stiffness: 1200, damping: 40, mass: 0.1 }}
-      >
-        <div className={`w-2 h-2 rounded-full transition-all duration-150 ${cursorHover ? 'bg-cyan-400 scale-0' : 'bg-cyan-400 scale-100'}`} />
-      </motion.div>
-      <motion.div
-        className="hidden lg:block fixed top-0 left-0 z-[100] pointer-events-none mix-blend-difference"
-        animate={{ x: cursorPos.x - (cursorHover ? 24 : 16), y: cursorPos.y - (cursorHover ? 24 : 16) }}
-        transition={{ type: "spring", stiffness: 250, damping: 22, mass: 0.5 }}
-      >
-        <div className={`rounded-full border-2 transition-all duration-300 ${cursorHover ? 'w-12 h-12 border-white bg-white/20' : 'w-8 h-8 border-white/50 bg-transparent'}`} />
-      </motion.div>
+      {!prefersReducedMotion && (
+        <>
+          <motion.div
+            className="hidden lg:block fixed top-0 left-0 z-[100] pointer-events-none"
+            animate={{ x: cursorPos.x - 4, y: cursorPos.y - 4 }}
+            transition={{ type: "spring", stiffness: 1200, damping: 40, mass: 0.1 }}
+          >
+            <div className={`w-2 h-2 rounded-full transition-all duration-150 ${cursorHover ? 'bg-cyan-400 scale-0' : 'bg-cyan-400 scale-100'}`} />
+          </motion.div>
+          <motion.div
+            className="hidden lg:block fixed top-0 left-0 z-[100] pointer-events-none mix-blend-difference"
+            animate={{ x: cursorPos.x - (cursorHover ? 24 : 16), y: cursorPos.y - (cursorHover ? 24 : 16) }}
+            transition={{ type: "spring", stiffness: 250, damping: 22, mass: 0.5 }}
+          >
+            <div className={`rounded-full border-2 transition-all duration-300 ${cursorHover ? 'w-12 h-12 border-white bg-white/20' : 'w-8 h-8 border-white/50 bg-transparent'}`} />
+          </motion.div>
+        </>
+      )}
 
       {/* ── Scroll progress ── */}
       <motion.div
@@ -673,7 +811,7 @@ export default function Portfolio() {
       {/* ── Project detail modal ── */}
       <AnimatePresence>
         {activeProject && (
-          <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} darkMode={darkMode} />
+          <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} darkMode={darkMode} reducedMotion={prefersReducedMotion} />
         )}
       </AnimatePresence>
 
@@ -691,7 +829,7 @@ export default function Portfolio() {
                 <li key={l.label}>
                   <a
                     href={l.href}
-                    className={`relative py-1 transition-colors duration-300 font-medium whitespace-nowrap ${
+                    className={`futuristic-link relative py-1 transition-colors duration-300 font-medium whitespace-nowrap ${
                       isActive
                         ? darkMode ? 'text-cyan-400' : 'text-indigo-600'
                         : darkMode ? 'text-white/50 hover:text-white/80' : 'text-slate-500 hover:text-slate-800'
@@ -786,11 +924,52 @@ export default function Portfolio() {
 
       {/* ── Hero ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6">
-        <div className={`absolute top-1/3 -left-20 sm:-left-40 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] rounded-full blur-[100px] sm:blur-[150px] ${darkMode ? 'bg-cyan-500/8' : 'bg-indigo-300/15'}`} />
+        <motion.div
+          className={`absolute -top-24 left-1/2 -translate-x-1/2 w-[540px] sm:w-[780px] h-[540px] sm:h-[780px] rounded-full blur-[120px] sm:blur-[160px] ${darkMode ? 'bg-cyan-500/12' : 'bg-indigo-300/20'}`}
+          animate={prefersReducedMotion ? {} : { scale: [1, 1.08, 1], opacity: [0.65, 0.85, 0.65] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
         <div className={`absolute bottom-1/3 -right-20 sm:-right-40 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] rounded-full blur-[100px] sm:blur-[150px] ${darkMode ? 'bg-pink-500/8' : 'bg-rose-300/15'}`} />
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full blur-[80px] sm:blur-[120px] ${darkMode ? 'bg-yellow-500/5' : 'bg-amber-200/15'}`} />
-
-        <div className={`absolute inset-0 bg-[size:30px_30px] sm:bg-[size:40px_40px] ${darkMode ? 'bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)]' : 'bg-[radial-gradient(rgba(0,0,0,0.04)_1px,transparent_1px)]'}`} />
+        <div className={`absolute inset-0 opacity-45 ${darkMode ? 'bg-[radial-gradient(rgba(255,255,255,0.045)_1px,transparent_1px)]' : 'bg-[radial-gradient(rgba(0,0,0,0.055)_1px,transparent_1px)]'} bg-[size:28px_28px] sm:bg-[size:36px_36px]`} />
+        <div className={`absolute inset-0 ${darkMode ? "bg-[linear-gradient(to_right,rgba(34,211,238,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.05)_1px,transparent_1px)]" : "bg-[linear-gradient(to_right,rgba(79,70,229,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(79,70,229,0.07)_1px,transparent_1px)]"} bg-[size:70px_70px] opacity-20`} />
+        {!prefersReducedMotion && (
+          <>
+            <motion.div
+              className={`absolute left-0 right-0 h-28 sm:h-36 ${darkMode ? "bg-gradient-to-b from-cyan-400/8 to-transparent" : "bg-gradient-to-b from-indigo-400/10 to-transparent"}`}
+              animate={{ y: ["-25%", "105%"] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+            <div className="absolute inset-0 hidden sm:block pointer-events-none">
+              {[
+                { top: "22%", left: "20%", width: "23%", rotate: "10deg" },
+                { top: "38%", left: "41%", width: "20%", rotate: "-18deg" },
+                { top: "52%", left: "24%", width: "29%", rotate: "7deg" },
+                { top: "44%", left: "54%", width: "25%", rotate: "18deg" },
+              ].map((line, idx) => (
+                <motion.span
+                  key={`line-${idx}`}
+                  className={`absolute h-px origin-left ${darkMode ? "bg-cyan-300/25" : "bg-indigo-400/25"}`}
+                  style={line}
+                  animate={{ opacity: [0.2, 0.55, 0.2] }}
+                  transition={{ duration: 3.8 + idx * 0.45, repeat: Infinity, ease: "easeInOut" }}
+                />
+              ))}
+              {[
+                { top: "18%", left: "20%" }, { top: "24%", left: "43%" }, { top: "34%", left: "70%" },
+                { top: "55%", left: "26%" }, { top: "62%", left: "55%" }, { top: "44%", left: "82%" },
+              ].map((node, idx) => (
+                <motion.span
+                  key={idx}
+                  className={`absolute w-1.5 h-1.5 rounded-full ${darkMode ? "bg-cyan-300/80" : "bg-indigo-500/70"} shadow-[0_0_12px_rgba(56,189,248,0.45)]`}
+                  style={node}
+                  animate={{ scale: [1, 1.7, 1], opacity: [0.35, 0.95, 0.35] }}
+                  transition={{ duration: 3 + idx * 0.35, repeat: Infinity, ease: "easeInOut" }}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -1105,23 +1284,26 @@ export default function Portfolio() {
                   key={proj.title}
                   custom={pi}
                   variants={fadeUp}
-                  whileHover={{ x: 6 }}
+                  whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.008 }}
                   onClick={() => setActiveProject(proj)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActiveProject(proj)}
-                  className={`group block cursor-pointer rounded-xl sm:rounded-2xl border p-5 sm:p-8 transition-all duration-500 hover:shadow-lg ${
+                  className={`group relative overflow-hidden block cursor-pointer rounded-xl sm:rounded-2xl border p-5 sm:p-8 transition-all duration-500 hover:shadow-lg ${
                     proj.featured
-                      ? darkMode ? 'bg-white/[0.03] border-cyan-500/20 hover:border-cyan-500/40 hover:shadow-cyan-500/10' : 'bg-white border-indigo-200 shadow-sm hover:border-indigo-300 hover:shadow-indigo-100/50'
-                      : darkMode ? 'bg-white/[0.02] border-white/5 hover:border-cyan-500/30 hover:shadow-cyan-500/5' : 'bg-white border-slate-200 shadow-sm hover:border-indigo-200 hover:shadow-indigo-100/40'
+                      ? darkMode ? 'bg-white/[0.03] border-cyan-500/20 hover:border-cyan-400/50 hover:shadow-cyan-500/20' : 'bg-white border-indigo-200 shadow-sm hover:border-indigo-300 hover:shadow-indigo-100/70'
+                      : darkMode ? 'bg-white/[0.02] border-white/5 hover:border-cyan-500/35 hover:shadow-cyan-500/15' : 'bg-white border-slate-200 shadow-sm hover:border-indigo-200 hover:shadow-indigo-100/60'
                   }`}
                 >
+                  <div className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${
+                    darkMode ? 'bg-[radial-gradient(circle_at_15%_20%,rgba(34,211,238,0.12),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.12),transparent_40%)]' : 'bg-[radial-gradient(circle_at_15%_20%,rgba(79,70,229,0.12),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(236,72,153,0.1),transparent_40%)]'
+                  }`} />
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
-                    <span className={`text-4xl sm:text-6xl font-black transition-colors font-mono shrink-0 leading-none ${darkMode ? 'text-white/[0.04] group-hover:text-cyan-500/10' : 'text-slate-100 group-hover:text-indigo-100'}`}>
+                    <span className={`text-4xl sm:text-6xl font-black transition-all duration-500 font-mono shrink-0 leading-none ${darkMode ? 'text-white/[0.04] group-hover:text-cyan-500/20 group-hover:-translate-y-1' : 'text-slate-100 group-hover:text-indigo-100 group-hover:-translate-y-1'}`}>
                       {String(pi + 1).padStart(2, "0")}
                     </span>
 
-                    <div className="flex-1 min-w-0">
+                    <div className="relative z-10 flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-3 mb-1">
                         <h3 className={`text-lg sm:text-xl font-bold transition-colors ${darkMode ? 'text-white/80 group-hover:text-cyan-400' : 'text-slate-800 group-hover:text-indigo-600'}`}>
                           {proj.title}
@@ -1140,7 +1322,7 @@ export default function Portfolio() {
                         {proj.tech.slice(0, 6).map((t) => (
                           <span
                             key={t}
-                            className={`text-xs font-mono px-2.5 py-1 rounded border ${darkMode ? 'bg-cyan-500/5 text-cyan-400/60 border-cyan-500/10' : 'bg-teal-50 text-teal-600/70 border-teal-200'}`}
+                            className={`text-xs font-mono px-2.5 py-1 rounded border transition-all duration-300 ${darkMode ? 'bg-cyan-500/5 text-cyan-400/60 border-cyan-500/10 group-hover:border-cyan-400/30 group-hover:text-cyan-300/80' : 'bg-teal-50 text-teal-600/70 border-teal-200 group-hover:border-indigo-300 group-hover:text-indigo-600'}`}
                           >
                             {t}
                           </span>
@@ -1162,9 +1344,9 @@ export default function Portfolio() {
                           GitHub ↗
                         </a>
                         <span
-                          className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${darkMode ? 'text-cyan-400/60 group-hover:text-cyan-400' : 'text-indigo-500/70 group-hover:text-indigo-600'}`}
+                          className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${darkMode ? 'text-cyan-400/60 group-hover:text-cyan-300' : 'text-indigo-500/70 group-hover:text-indigo-600'}`}
                         >
-                          View details →
+                          View details <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </span>
                       </div>
                     </div>
@@ -1359,7 +1541,7 @@ export default function Portfolio() {
                 href={link.href}
                 target={link.label !== "Email" ? "_blank" : undefined}
                 rel={link.label !== "Email" ? "noreferrer" : undefined}
-                className={`text-sm transition-colors font-mono ${darkMode ? 'text-white/20 hover:text-cyan-400' : 'text-slate-400 hover:text-indigo-600'}`}
+                className={`futuristic-link text-sm transition-colors font-mono ${darkMode ? 'text-white/20 hover:text-cyan-400' : 'text-slate-400 hover:text-indigo-600'}`}
               >
                 {link.label}
               </a>
